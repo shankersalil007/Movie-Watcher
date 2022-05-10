@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
   searchText;
-  constructor() {}
+  constructor(private ms: MovieService) {}
 
   ngOnInit(): void {}
 
   onButtonClick(myInput: HTMLElement) {
     myInput.parentElement.classList.toggle('active');
-    console.log('button clicked', myInput);
+  }
+
+  onChange(newValue) {
+    this.ms.moviesFiltered.emit(newValue);
   }
 }

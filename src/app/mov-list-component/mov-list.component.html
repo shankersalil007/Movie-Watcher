@@ -1,6 +1,6 @@
 <section>
   <rev-mov
-    *ngFor="let movie of movies"
+    *ngFor="let movie of isFiltered ? filteredMovies : movies"
     [movie]="movie"
     (otp)="onMovieDelete($event)"
     [ngClass]="{ 'is-fav': movie.isFavorite }"

@@ -1,6 +1,7 @@
 <div aligh="right" class="search">
   <input
     [(ngModel)]="searchText"
+    (ngModelChange)="onChange($event)"
     type="text"
     class="input"
     placeholder="Search.."

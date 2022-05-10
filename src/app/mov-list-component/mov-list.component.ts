@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { flattenDiagnosticMessageText } from 'typescript';
 import { MovieService } from '../movie.service';
 import { catogoryToken } from '../providers';
 
@@ -15,7 +16,27 @@ export class MovListComponent implements OnInit {
     private activatedRout: ActivatedRoute
   ) {}
 
-  movies;
+  isFiltered = false;
+
+  movies: {
+    id: number;
+    name: string;
+    medium: string;
+    category: string;
+    year: number;
+    watchedOn: number;
+    isFavorite: boolean;
+  }[];
+
+  filteredMovies: {
+    id: number;
+    name: string;
+    medium: string;
+    category: string;
+    year: number;
+    watchedOn: number;
+    isFavorite: boolean;
+  }[];
 
   ngOnInit() {
     this.setMovies('');
@@ -35,6 +56,23 @@ export class MovListComponent implements OnInit {
         this.setMovies(cat);
       });
     });
+
+    this.movieService.moviesFiltered.subscribe((resp) => {
+      this.filterMovies(resp);
+    });
+  }
+
+  filterMovies(pattern: string) {
+    if (pattern.length == 0) {
+      this.isFiltered = false;
+    } else {
+      this.filteredMovies = this.movies.filter((m) => {
+        return m.name.startsWith(pattern);
+      });
+      this.isFiltered = true;
+    }
+
+    // return this.filterMovies;
   }
 
   setMovies(category) {

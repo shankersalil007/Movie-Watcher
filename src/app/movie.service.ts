@@ -50,6 +50,8 @@ export class MovieService implements OnInit {
 
   moviesChanged = new EventEmitter<Observable<MediaItem[]>>();
 
+  moviesFiltered = new EventEmitter<string>();
+
   get() {
     const result = this.http.get<MediaItemResponse>('mediaitems').pipe(
       map((resp) => {
