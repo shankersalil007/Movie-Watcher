@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { map, catchError, throwError } from 'rxjs';
+import { Injectable, OnInit, EventEmitter } from '@angular/core';
+import { map, catchError, throwError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +48,8 @@ export class MovieService implements OnInit {
 
   ngOnInit(): void {}
 
+  moviesChanged = new EventEmitter<Observable<MediaItem[]>>();
+
   get() {
     const result = this.http.get<MediaItemResponse>('mediaitems').pipe(
       map((resp) => {
@@ -71,9 +73,13 @@ export class MovieService implements OnInit {
   // }
 
   deleteMovie(ourmovie) {
-    return this.http
-      .delete(`mediaitems/${ourmovie.id}`)
-      .pipe(catchError(this.handleError));
+    console.log('inside service: deleting  ' + ourmovie);
+    return this.http.delete(`mediaitems/${ourmovie.id}`).pipe(
+      map(() => {
+        this.moviesChanged.emit(this.get());
+      }),
+      catchError(this.handleError)
+    );
   }
 
   // addMovie(movie) {

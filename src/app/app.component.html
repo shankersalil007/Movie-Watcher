@@ -5,14 +5,9 @@
     <a routerLink="/All" class="nav-link" href="#" id="All">All</a>
   </li>
   <li class="nav-item" *ngFor="let cat of catogs.cats">
-    <a
-      class="nav-link"
-      href="#"
-      (click)="onClickLink(cat)"
-      [id]="cat"
-      routerLink="/{{ cat }}"
-      >{{ cat }}</a
-    >
+    <a class="nav-link" href="#" [id]="cat" routerLink="/{{ cat }}">{{
+      cat
+    }}</a>
   </li>
 </ul>
 

@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { MovListComponent } from './mov-list.component';
+import { MovListComponent } from './mov-list-component/mov-list.component';
 
 const appRoutes: Routes = [
   {

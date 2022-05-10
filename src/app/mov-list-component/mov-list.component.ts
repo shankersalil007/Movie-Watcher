@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MovieService } from './movie.service';
-import { catogoryToken } from './providers';
 import { ActivatedRoute } from '@angular/router';
+import { MovieService } from '../movie.service';
+import { catogoryToken } from '../providers';
 
 @Component({
   selector: 'rev-mov-list',
@@ -20,12 +20,20 @@ export class MovListComponent implements OnInit {
   ngOnInit() {
     this.setMovies('');
 
+    let cat;
+
     this.activatedRout.paramMap.subscribe((paramMap) => {
-      let cat = paramMap.get('category');
+      cat = paramMap.get('category');
       if (cat === 'All') {
         cat = '';
       }
       this.setMovies(cat);
+    });
+
+    this.movieService.moviesChanged.subscribe((resp) => {
+      resp.subscribe((movieItem) => {
+        this.setMovies(cat);
+      });
     });
   }
 
