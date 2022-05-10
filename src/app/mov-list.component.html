@@ -1,0 +1,11 @@
+<section>
+  <rev-mov
+    *ngFor="let movie of movies"
+    [movie]="movie"
+    (otp)="onMovieDelete($event)"
+    [ngClass]="{ 'is-fav': movie.isFavorite }"
+  ></rev-mov>
+</section>
+<footer class="d-flex justify-content-center">
+  <a routerLink="/add" href="#" class="btn btn-success">Add</a>
+</footer>

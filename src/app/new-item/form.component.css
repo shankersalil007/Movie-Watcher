@@ -1,0 +1,7 @@
+.form-control.ng-invalid {
+  border: 2px solid red;
+}
+
+:host {
+  margin-bottom: 20px;
+}
