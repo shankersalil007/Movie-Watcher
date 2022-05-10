@@ -10,6 +10,8 @@ import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 import { routing } from './app.routing';
 import { MovComponent } from './mov-component/mov.component';
 import { MovListComponent } from './mov-list-component/mov-list.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,9 @@ import { MovListComponent } from './mov-list-component/mov-list.component';
     MovComponent,
     MovListComponent,
     FavoriteDirective,
+    SearchBarComponent,
   ],
-  imports: [BrowserModule, NgbModule, HttpClientModule, routing],
+  imports: [BrowserModule, NgbModule, HttpClientModule, routing, FormsModule],
   providers: [
     { provide: catogoryToken, useValue: categories },
     { provide: HttpXhrBackend, useClass: MockXHRBackend },

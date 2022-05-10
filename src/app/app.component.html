@@ -2,12 +2,13 @@
 
 <ul class="nav nav-tabs mt-2">
   <li class="nav-item">
-    <a routerLink="/All" class="nav-link" href="#" id="All">All</a>
+    <a routerLink="/All" class="nav-link" id="All">All</a>
   </li>
   <li class="nav-item" *ngFor="let cat of catogs.cats">
-    <a class="nav-link" href="#" [id]="cat" routerLink="/{{ cat }}">{{
-      cat
-    }}</a>
+    <a class="nav-link" [id]="cat" routerLink="/{{ cat }}">{{ cat }}</a>
+  </li>
+  <li>
+    <app-search-bar></app-search-bar>
   </li>
 </ul>
 
